@@ -24,4 +24,14 @@
 // Within your submission, include the results for 1, 2, and 3 weeks of growth as inputs.
 
 const PI = 3.1415;
+let maxRadius = 5;
+let radius = 0.8;
 const area = PI * radius * radius;
+const maxArea = PI * maxRadius * maxRadius;
+let reqSpase = 0.8;
+plantsAmount = 20;
+week0 = plantsAmount*reqSpase;
+console.log(`Start point, for ${plantsAmount} plants we need ${week0} sq.feet`);
+plantsAmount=plantsAmount*2;
+week1 = plantsAmount * reqSpase; 
+console.log(`Week1, for ${plantsAmount} plants we need ${week1} sq.feet`);
