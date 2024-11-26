@@ -31,24 +31,54 @@ let radius = 0.8;
 const area = PI * radius * radius;
 const maxArea = PI * maxRadius * maxRadius;
 console.log(`Max area ${maxArea}`);
-let reqSpase = 0.8;
 const maxPlants = maxArea / radius; // max number of plants that can fit in the garden
 console.log(`Max plants ${maxPlants}`);
+
 let plantsAmount = 20;
-week0 = plantsAmount*reqSpase;
-console.log(`Start point, for ${plantsAmount} plants we need ${week0} sq.feet`);
+let reqSpace = plantsAmount*radius;
+console.log(`Start point, for ${plantsAmount} plants we need ${reqSpace} sq.m`);
 for (let i=1; i<=3; i++) {
     plantsAmount=plantsAmount*2;
     console.log(`Week ${i}, we have ${plantsAmount} plants`);
     // Determine the control flow based on plant count
     if (plantsAmount > 0.8 * maxPlants) {
-            console.log("Action: Prune the plants to prevent overcrowding.");
+            console.log("Need Action: Prune the plants to prevent overcrowding.");
     }       else if (plantsAmount >= 0.5 * maxPlants && plantsAmount <= 0.8 * maxPlants) {
-                        console.log("Action: Monitor the plant growth, they are growing at an acceptable rate.");
+                        console.log("Monitor the plant growth, they are growing at an acceptable rate.");
                         } else if (plantsAmount < 0.5 * maxPlants) {
-                                        console.log("Action: Plant more plants, there's room in the garden.");
+                                        console.log("Need Action: Plant more plants, there's room in the garden.");
             }
 }
 
 
+// Part 2: Thinking Bigger
+// The conservation area in which the garden is located has multiple other gardens. 
+// Using the logic you have already created, determine:
+// The amount of additional space that would be required if the scientists were to start with 100 plants, and did not prune them for 10 weeks.
+console.log("--- Start with 100 plants ---");
+plantsAmount=100;
+for (let i=1; i<=10; i++) {
+        plantsAmount=plantsAmount*2;
+        week = plantsAmount*radius;
+        console.log(`Week ${i}, we have ${plantsAmount} plants and they are need ${week} sq.m`);
+        try {
+                if (week>=maxArea){
+                        throw "Error! You are out of available space!";
+                }
+        }
+        catch (error) {
+                console.log(error);
+        }
+}
 
+let area100 = plantsAmount*radius;
+console.log(`For ${plantsAmount} plans we need ${area100} sq.m`);
+let addSpace = area100-maxArea;
+console.log(`We have only ${maxArea}, and need more ${addSpace} sq.m`);
+// If the space remained circular, what would be the radius of this expanded garden?
+let radius100 = Math.sqrt(area100 / PI);
+console.log(`Radius of this area is ${radius100} metrs`);
+
+// Part 3: Errors in Judgement
+// The scientists decided not to listen to your recommendations, and have instead started with 100 plants in the original 5-meter-radius garden.
+// Use try and catch to wrap your work in an error-handling block. If the amount of space required to hold the originally provided number of plants exceeds the amount of space available, throw a new error and log an appropriate message.
